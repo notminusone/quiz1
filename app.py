@@ -136,7 +136,8 @@ def edit():
 	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 	cursor = cnxn.cursor()
 	cursor.execute('update nquakes2 set place='+place+" where id="+id)
-	return render_template('part13.html',part13_active = "active",title="Part 13",information="modify success!!")
+	cursor.commit()
+	return render_template('part13.html',part13_active = "active",title="Part 13")
 
 @app.errorhandler(404)
 @app.route("/error404")
