@@ -40,9 +40,9 @@
                 <form action="edit" method="post" class="form" role="form"
                 style="display: flex; flex-direction:row;"> 
                 <input class="form-control" id="id" name="id"  type="hidden"
-                        value="${row[5]}" style="margin-right: 2px;">
+                        value={{row[5]}} style="margin-right: 2px;">
                 <input class="form-control" id="place" name="place" placeholder="Input the place you want to modify" type="text"
-                        value="${row[5]}" style="margin-right: 2px;">
+                        value="" style="margin-right: 2px;">
                 <input class="btn btn-primary" id="submit" name="submit" type="submit" value="edit">
                 </form>
                 <button action="/delete" id="id" value="${row[5]}" method="post">delete</button>
