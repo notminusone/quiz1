@@ -7,6 +7,7 @@
         style="display: flex; flex-direction:row; width: 60%; margin-bottom: 40px;"> 
         <input class="form-control" id="net" name="net" placeholder="Input the net value" type="text"
             value="" style="margin-right: 20px;">
+        <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Search">
 
     </form>
     {% if data %}
@@ -20,6 +21,7 @@
             <th>net</th>
             <th>id</th>
             <th>place</th>
+            <th>operation</th>
         </tr>
         {% for row in data %}
         <tr>
@@ -30,10 +32,16 @@
             <td>{{ row[4] }}</td>
             <td>{{ row[5] }}</td>
             <td>{{ row[6] }}</td>
-            <td>{{ row[8] }}</td>
+            <td>{{ row[7] }}</td>
+            <td>
+                <button action="/delete" id="id" value="${row[5]}" method="post"></button>
+            </td>
         </tr>
         {% endfor %}
     </table>
     {% endif %}
 </div>
 {% endblock %}
+<script>
+
+</script>
