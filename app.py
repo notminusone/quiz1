@@ -27,11 +27,11 @@ driver= '{ODBC Driver 17 for SQL Server}'
 # 
 # ROUTES!
 
-cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
-cursor = cnxn.cursor()
+
 @app.route('/')
 def part10():
-	
+	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+	cursor = cnxn.cursor()
 	cnxn.excute("select count(*) from [dbo].[nquakes2]")
 	row = cursor.fetchval()
 	cnxn.excute("select id,place from [dbo].[nquakes2] where mag=(select max(mag) from [dbo].[nquakes2])")
