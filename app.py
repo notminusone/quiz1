@@ -81,20 +81,20 @@ def part12():
 	if request.method=='GET':
 		return render_template('part12.html',part12_active = "active",title="Part 12")
 	if request.method=='POST':
-		latitude1 = request.form["latitude1"]
-		latitude2 = request.form["latitude2"]
+		latitude1 = float(request.form["latitude1"])
+		latitude2 = float(request.form["latitude2"])
 		low_latitude = min(latitude1,latitude2)
 		high_latitude = max(latitude1,latitude2)
 	
-		longitude1 = request.form["longitude1"]
-		longitude2 = request.form["longitude2"]
+		longitude1 = float(request.form["longitude1"])
+		longitude2 = float(request.form["longitude2"])
 		low_longitude = min(longitude1,longitude2)
 		high_longitude = max(longitude1,longitude2)
 		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 		cursor = cnxn.cursor()
 		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
-		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude between"+low_latitude+" and "+high_latitude+
-		" and longitude between"+low_longitude+" and "+high_longitude)
+		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude between "+str(low_latitude)+" and "+str(high_latitude)+
+		" and longitude between "+str(low_longitude)+" and "+str(high_longitude))
 		row = cursor.fetchall()
 		if row is not None:
 			return render_template('part12.html',part12_active = "active",data =row)
