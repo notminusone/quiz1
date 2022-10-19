@@ -134,8 +134,8 @@ def delete():
 	quakeid = request.form["quakeid"]
 	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 	cursor = cnxn.cursor()
-	cursor.execute("select * from nquakes2 where id=?",quakeid)
-	row = cursor.fetchone()
+	cursor.execute("delete  from nquakes2 where id=?",quakeid)
+	cursor.commit()
 	return render_template('part13.html',part13_active = "active",title="Part 13",information="Deletion succeeded!")
 
 @app.route('/edit',methods=['POST'])
@@ -146,7 +146,9 @@ def edit():
 	cursor = cnxn.cursor()
 	cursor.execute("update nquakes2 set place=? where id=?",place,quakeid)
 	cursor.commit()
-	return render_template('part13.html',part13_active = "active",title="Part 13",information="Modified succeeded!")
+	cursor.execute("select * from nquakes2 where id=?",quakeid)
+	row = cursor.fetchone()
+	return render_template('part13.html',part13_active = "active",title="Part 13",information="Modified succeeded!",newdata=row)
 
 @app.errorhandler(404)
 @app.route("/error404")
