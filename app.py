@@ -60,9 +60,9 @@ def part11():
 		data = []
 		step = (high-low)/N
 		for i in range(N):
-			cursor.execute("select count(*) from nquakes2 where mag>?",low+step*i,"and mag<?",low+step*(i+1))
-			num = cursor.fetchval()
-			cursor.execute("select max(mag) from nquakes2 where mag>?",low+step*i,"and mag<?",low+step*(i+1))
+			cursor.execute("select count(*) from nquakes2 where mag>"+str(low + step * i)+ "and mag<"+ str(low + step * (i + 1)))
+    		num = cursor.fetchval()
+    		cursor.execute("select max(mag) from nquakes2 where mag>"+str(low + step * i)+ "and mag<"+ str(low + step * (i + 1)))
 			max = cursor.fetchval()
 			cursor.execute("select time,place from nquakes2 where mag=?",max)
 			row = cursor.fetchone()
