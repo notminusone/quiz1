@@ -99,13 +99,20 @@ def part13():
 		return render_template('part13.html',part13_active = "active",title="Part 13")
 	if request.method=='POST':
 		net = request.form["net"]
+		id = request.form["id"]
 		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 		cursor = cnxn.cursor()
-		cursor.execute("select top(6)* from nquakes2 where net=? order by time desc ",net)
-		data = cursor.fetchall()
-		if len(data) > 0:
-			return render_template('part13.html',part13_active = "active",title="Part 13",data=data)
+		if id =="":
+			cursor.execute("select top(6)* from nquakes2 where net=? order by time desc ",net)
+			data = cursor.fetchall()
+			if len(data) > 0:
+				return render_template('part13.html',part13_active = "active",title="Part 13",data=data)
+			else:
+				return render_template('part13.html',part13_active = "active",title="Part 13")
+		
 		else:
+			place = request.form["place"]
+			cursor.execute('update nquakes2 set place='+place+" where id="+id)
 			return render_template('part13.html',part13_active = "active",title="Part 13")
 
 @app.route('/delete',methods=['POST'])
