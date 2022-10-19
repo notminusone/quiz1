@@ -35,9 +35,9 @@ def part10():
 	cursor.execute("select count(*) from [dbo].[nquakes2]")
 	row = cursor.fetchval()
 	cursor.execute("select id,place from [dbo].[nquakes2] where mag=(select max(mag) from [dbo].[nquakes2])")
-	row1 = cursor.fetchval()
+	row1 = cursor.fetchone()
 	cursor.execute("select id,place from [dbo].[nquakes2] where mag=(select min(mag) from [dbo].[nquakes2])")
-	row2 = cursor.fetchval()
+	row2 = cursor.fetchone()
 	return render_template('part10.html',sum=row,part10_active="active",title="Part 10",max={
 		'id':row1[0],
 		'location':row1[1]
@@ -131,20 +131,20 @@ def part13():
 
 @app.route('/delete',methods=['POST'])
 def delete():
-	id = request.form['id']
+	quakeid = request.form["quakeid"]
 	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 	cursor = cnxn.cursor()
-	cursor.execute("select * from quakes2 where id=?",id)
+	cursor.execute("select * from quakes2 where id=?",quakeid)
 	row = cursor.fetchone()
 	return render_template('part13.html',part13_active = "active",title="Part 13",information="Deletion succeeded!")
 
 @app.route('/edit',methods=['POST'])
 def edit():
-	id = request.form['id']
+	quakeid = request.form['quakeid']
 	place = request.form["place"]
 	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 	cursor = cnxn.cursor()
-	cursor.execute("update nquakes2 set place=? where id=?",place,id)
+	cursor.execute("update nquakes2 set place=? where id=?",place,quakeid)
 	cursor.commit()
 	return render_template('part13.html',part13_active = "active",title="Part 13")
 
