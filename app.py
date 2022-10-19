@@ -52,9 +52,9 @@ def part11():
 	if request.method=='GET':
 		return render_template('part11.html',part11_active = "active",title="Part 11")
 	if request.method=='POST':
-		low = request.form["low"]
-		high = request.form["high"]
-		N = request.form["N"]
+		low = float(request.form["low"])
+		high = float(request.form["high"])
+		N = int(request.form["N"])
 		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 		cursor = cnxn.cursor()
 		data = []
@@ -71,7 +71,7 @@ def part11():
 				"time":row[0],
 				"place":row[1]
 			})
-		if len(data) != 0:
+		if len(data) > 0:
 			return render_template('part11.html',part11_active = "active",title="Part 11",data=data)
 		else:
 			return render_template('part11.html',part11_active = "active",title="Part 11")
