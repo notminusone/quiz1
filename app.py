@@ -93,6 +93,21 @@ def part12():
 		else:
 			return render_template('part12.html',part12_active = "active",title="Part 12")
 
+@app.route('/part13',methods=['GET','POST'])
+def part13():
+	if request.method=='GET':
+		return render_template('part13.html',part13_active = "active",title="Part 13")
+	if request.method=='POST':
+		net = request.form["net"]
+		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+		cursor = cnxn.cursor()
+		cursor.execute("select top(6)* from nquakes2 where net=? order by time desc ",net)
+		data = cursor.fetchall()
+		if len(data) > 0:
+			return render_template('part13.html',part13_active = "active",title="Part 13",data=data)
+		else:
+			return render_template('part13.html',part13_active = "active",title="Part 13")
+
 @app.errorhandler(404)
 @app.route("/error404")
 def page_not_found(error):
