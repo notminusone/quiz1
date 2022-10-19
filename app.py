@@ -32,11 +32,11 @@ driver= '{ODBC Driver 17 for SQL Server}'
 def part10():
 	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 	cursor = cnxn.cursor()
-	cnxn.execute("select count(*) from [dbo].[nquakes2]")
+	cursor.execute("select count(*) from [dbo].[nquakes2]")
 	row = cursor.fetchval()
-	cnxn.execute("select id,place from [dbo].[nquakes2] where mag=(select max(mag) from [dbo].[nquakes2])")
+	cursor.execute("select id,place from [dbo].[nquakes2] where mag=(select max(mag) from [dbo].[nquakes2])")
 	row1 = cursor.fetchval()
-	cnxn.execute("select id,place from [dbo].[nquakes2] where mag=(select min(mag) from [dbo].[nquakes2])")
+	cursor.execute("select id,place from [dbo].[nquakes2] where mag=(select min(mag) from [dbo].[nquakes2])")
 	row2 = cursor.fetchval()
 	return render_template('part10.html',sum=row,part10_active="active",title="Part 10",max={
 		'id':row1[0],
@@ -45,7 +45,7 @@ def part10():
 		'id':row2[0],
 		'location':row2[1]
 	})
-	return render_template('part10.html',part10_active = "active",title="Part 10")
+	
 
 @app.route('/part11',methods=['GET','POST'])
 def part11():
@@ -132,7 +132,11 @@ def part13():
 @app.route('/delete',methods=['POST'])
 def delete():
 	id = request.form['id']
-	return render_template('part13.html',part13_active = "active",title="Part 13")
+	cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+	cursor = cnxn.cursor()
+	cursor.execute("select * from quakes2 where id=?",id)
+	row = cursor.fetchone()
+	return render_template('part13.html',part13_active = "active",title="Part 13",information="Deletion succeeded!")
 
 @app.route('/edit',methods=['POST'])
 def edit():
