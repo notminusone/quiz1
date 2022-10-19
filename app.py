@@ -26,15 +26,25 @@ password = '0626Fuyi'
 driver= '{ODBC Driver 17 for SQL Server}'
 # 
 # ROUTES!
+
 cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 cursor = cnxn.cursor()
-
 @app.route('/')
 def part10():
 	
-	cnxn.excute("select count(1) from [dbo].[nquakes2]")
-	row = cursor.fetchone()
-	return render_template('part10.html',sum=row,part10_active="active",title="Part 10")
+	cnxn.excute("select count(*) from [dbo].[nquakes2]")
+	row = cursor.fetchval()
+	cnxn.excute("select id,place from [dbo].[nquakes2] where mag=(select max(mag) from [dbo].[nquakes2])")
+	row1 = cursor.fetchval()
+	cnxn.excute("select id,place from [dbo].[nquakes2] where mag=(select min(mag) from [dbo].[nquakes2])")
+	row2 = cursor.fetchval()
+	return render_template('part10.html',sum=row,part10_active="active",title="Part 10",max={
+		'id':row1[0],
+		'location':row1[1]
+	},min={
+		'id':row2[0],
+		'location':row2[1]
+	})
 
 @app.route('/part11')
 def part11():
