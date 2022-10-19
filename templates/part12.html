@@ -22,11 +22,11 @@
         </tr>
         {% for quake in data %}
         <tr>
-            <th>{{quake.id}}</th>
-            <th>{{quake.lat}}</th>
-            <th>{{quake.long}}</th>
-            <th>{{quake.net}}</th>
-            <th>{{quake.place}}</th>
+            <th>{{quake[0]}}</th>
+            <th>{{quake[1]}}</th>
+            <th>{{quake[2]}}</th>
+            <th>{{quake[3]}}</th>
+            <th>{{quake[4]}}</th>
         </tr>
     </table>
     {% endif %}

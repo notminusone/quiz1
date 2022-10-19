@@ -70,20 +70,18 @@ def part12():
 	if request.method=='GET':
 		return render_template('part12.html',part12_active = "active",title="Part 12")
 	if request.method=='POST':
-		name = request.form["name"]
-		print('name:' + name)
-		
-		cursor.execute("select Name,Keywords,Picture from data where Name=?",name)
-		row = cursor.fetchone()
+		latitude = request.form["latitude"]
+		longitude = request.form["longitude"]
+		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+		cursor = cnxn.cursor()
+		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
+		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=35.051 and longitude=-117.6728333")
+		row = cursor.fetchall()
 		print(row)
 		if row is not None:
-			return render_template('part12.html',part12_active = "active",data = {
-				'name':row[0],
-				'keywords':row[1],
-				'picture':row[2]
-			})
+			return render_template('part12.html',part12_active = "active",data =row)
 		else:
-			return render_template('part12.html',part12_active = "active",information="no information or picture available",title="Part 12")
+			return render_template('part12.html',part12_active = "active",title="Part 12")
 
 @app.errorhandler(404)
 @app.route("/error404")
