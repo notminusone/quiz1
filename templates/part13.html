@@ -14,7 +14,7 @@
     <h2>{{information}}</h2>
     {% endif %}
     {% if data %}
-    <table class="table table-striped table-bordered table-hover table-condensed" style="width: 80%; margin:auto">
+    <table class="table table-striped table-bordered table-hover table-condensed" style="width: 100%; margin:auto">
         <tr>
             <th>time</th>
             <th>latitude</th>
@@ -45,7 +45,12 @@
                         value="" style="margin-right: 2px;">
                 <input class="btn btn-primary" id="submit" name="submit" type="submit" value="edit">
                 </form>
-                <button action="/delete" id="id" value="${row[5]}" method="post">delete</button>
+                <form action="delete" method="post" class="form" role="form"
+                style="display: flex; flex-direction:row;"> 
+                <input class="form-control" id="id" name="id"  type="hidden"
+                        value={{row[6]}} style="margin-right: 2px;">
+                <input class="btn btn-primary" id="submit" name="submit" type="submit" value="delete">
+                </form>
             </td>
         </tr>
         {% endfor %}
