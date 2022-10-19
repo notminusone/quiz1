@@ -77,7 +77,6 @@ def part12():
 		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
 		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=35.051 and longitude=-117.6728333")
 		row = cursor.fetchall()
-		print(row)
 		if row is not None:
 			return render_template('part12.html',part12_active = "active",data =row)
 		else:
