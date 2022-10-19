@@ -2,10 +2,10 @@
 
 {% block app_content %}
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <h4>The sum of quake :9928</h4>
+    <h4>The sum of quake :{{sum}}</h4>
     <br/>
-    <h4>The id of maximum is us7000i9bw , The location is 35 km SW of Aguililla, Mexico</h4>
+    <h4>The id of maximum is {{max.id}}, The location is {{max.location}}</h4>
     <br/>
-    <h4>The id of minimum is nn00848992, The location is 44 km ESE of Beatty, Nevada</h4>
+    <h4>The id of minimum is {{min.id}}, The location is {{min.location}}</h4>
 </div>
 {% endblock %}
