@@ -63,13 +63,14 @@
             <td>{{ row[6] }}</td>
             <td>{{ row[7] }}</td>
             <td>
+                <div style="display: flex; flex-direction:row;">
                 <form action="edit" method="post" class="form" role="form"
                 style="display: flex; flex-direction:row;"> 
                 <input class="form-control" id="quakeid" name="quakeid"  type="hidden"
                         value={{row[6]}} >
                 <input class="form-control" id="place" name="place" placeholder="New location" type="text"
-                        value="" style="margin-right: 2px;width: fit-content;">
-                <input class="btn btn-primary" id="submit" name="submit" type="submit" style="margin-right: 2px;" value="edit">
+                        value="" style="margin-right: 5px;width: 30px;">
+                <input class="btn btn-primary" id="submit" name="submit" type="submit" style="margin-right: 5px;" value="edit">
                 </form>
                 <form action="delete" method="post" class="form" role="form"
                 style="display: flex; flex-direction:row;"> 
@@ -77,6 +78,7 @@
                         value={{row[6]}} >
                 <input class="btn btn-primary" id="submit" name="submit" type="submit" value="delete">
                 </form>
+            </div>
             </td>
         </tr>
         {% endfor %}
