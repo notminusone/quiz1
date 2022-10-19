@@ -5,11 +5,11 @@
     style="width: 100%; display: flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
     <form action="" method="post" class="form" role="form"
         style="display: flex; flex-direction:row; width: 60%; margin-bottom: 40px;"> 
-    <input class="form-control" id="low" name="low" placeholder="Input the low value" type="text"
+    <input class="form-control" id="low" name="low" placeholder="Input the low value" type="number"
             value="" style="margin-right: 20px;">
-    <input class="form-control" id="high" name="high" placeholder="Input the high value" type="text"
+    <input class="form-control" id="high" name="high" placeholder="Input the high value" type="number"
             value="" style="margin-right: 20px;">
-    <input class="form-control" id="N" name="N" placeholder="Input the N value" type="text"
+    <input class="form-control" id="N" name="N" placeholder="Input the N value" type="number"
             value="" style="margin-right: 20px;">
     <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Search">
 </form>
@@ -21,7 +21,7 @@
             <th>time</th>
             <th>place</th>
         </tr>
-        {% for pic in pic_list %}
+        {% for pic in data %}
         <tr>
             <td>{{ pic.num}}</td>
             <td>{{ pic.time }}</td>

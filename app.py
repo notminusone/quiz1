@@ -47,23 +47,34 @@ def part10():
 	# })
 	return render_template('part10.html',part10_active = "active",title="Part 10")
 
-@app.route('/part11')
+@app.route('/part11',methods=['GET','POST'])
 def part11():
-	pic_list = []
-	url_list = ["static/alice.jpg","static/pluto.jpg","static/mars.jpg","static/curly.png","static/moe.jpg","static/chip.jpg"]
-	for url in url_list:
-		# response = requests.get(url)
-		# img = Image.open(BytesIO(response.content))	
-		img = Image.open(url)	
-		width = img.width
-		height = img.height
-		name = url.split('/', 2)[-1]
-		pic_list.append({
-			'name': name,
-			'width': width,
-			'height': height
-		})
-	return render_template('part11.html',part11_active = "active",pic_list=pic_list,title="Part 11")
+	if request.method=='GET':
+		return render_template('part11.html',part11_active = "active",title="Part 11")
+	if request.method=='POST':
+		low = request.form["low"]
+		high = request.form["high"]
+		N = request.form["N"]
+		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+		cursor = cnxn.cursor()
+		data = []
+		step = (high-low)/N
+		for i in range(N):
+			cursor.execute("select count(*) from nquakes2 where mag>?",low+step*i,"and mag<?",low+step*(i+1))
+			num = cursor.fetchval()
+			cursor.execute("select max(mag) from nquakes2 where mag>?",low+step*i,"and mag<?",low+step*(i+1))
+			max = cursor.fetchval()
+			cursor.execute("select time,place from nquakes2 where mag=?",max)
+			row = cursor.fetchone()
+			data.append({
+				"num":num,
+				"time":row[0],
+				"place":row[1]
+			})
+		if len(data) != 0:
+			return render_template('part11.html',part11_active = "active",title="Part 11",data=data)
+		else:
+			return render_template('part11.html',part11_active = "active",title="Part 11")
 
 @app.route('/part12',methods=['GET','POST'])
 def part12():
