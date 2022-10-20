@@ -101,32 +101,32 @@ def part12():
 		else:
 			return render_template('part12.html',part12_active = "active",title="Part 12")
 
-# @app.route('/part12_5',methods=['GET','POST'])
-# def part125():
-# 	if request.method=='GET':
-# 		return render_template('part12_5.html',part125_active = "active",title="Part 12_5")
-# 	if request.method=='POST':
-# 		latitude1 = float(request.form["latitude1"])
-# 		latitude2 = float(request.form["latitude2"])
-# 		low_latitude = min(latitude1,latitude2)
-# 		high_latitude = max(latitude1,latitude2)
+@app.route('/part14',methods=['GET','POST'])
+def part14():
+	if request.method=='GET':
+		return render_template('part14.html',part14_active = "active",title="Part 12.5")
+	if request.method=='POST':
+		latitude1 = float(request.form["latitude1"])
+		latitude2 = float(request.form["latitude2"])
+		low_latitude = min(latitude1,latitude2)
+		high_latitude = max(latitude1,latitude2)
 	
-# 		longitude1 = float(request.form["longitude1"])
-# 		longitude2 = float(request.form["longitude2"])
-# 		low_longitude = min(longitude1,longitude2)
-# 		high_longitude = max(longitude1,longitude2)
-# 		low_mag = float(request.form["low"])
-# 		high_mag = float(request.form["high"])
-# 		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
-# 		cursor = cnxn.cursor()
-# 		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
-# 		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude between "+str(low_latitude)+" and "+str(high_latitude)+
-# 		" and longitude between "+str(low_longitude)+" and "+str(high_longitude)+" and mag between "+str(low_mag)+" and "+str(high_mag))
-# 		row = cursor.fetchall()
-# 		if row is not None:
-# 			return render_template('part12_5.html',part125_active = "active",data =row)
-# 		else:
-# 			return render_template('part12_5.html',part125_active = "active",title="Part 12_5")
+		longitude1 = float(request.form["longitude1"])
+		longitude2 = float(request.form["longitude2"])
+		low_longitude = min(longitude1,longitude2)
+		high_longitude = max(longitude1,longitude2)
+		low_mag = float(request.form["low"])
+		high_mag = float(request.form["high"])
+		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+		cursor = cnxn.cursor()
+		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
+		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude between "+str(low_latitude)+" and "+str(high_latitude)+
+		" and longitude between "+str(low_longitude)+" and "+str(high_longitude)+" and mag between "+str(low_mag)+" and "+str(high_mag))
+		row = cursor.fetchall()
+		if row is not None:
+			return render_template('part14.html',part14_active = "active",data =row)
+		else:
+			return render_template('part14.html',part14_active = "active",title="Part 12_5")
 
 
 @app.route('/part13',methods=['GET','POST'])
