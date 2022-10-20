@@ -101,10 +101,10 @@ def part12():
 		else:
 			return render_template('part12.html',part12_active = "active",title="Part 12")
 
-@app.route('/part12.5',methods=['GET','POST'])
+@app.route('/part12_5',methods=['GET','POST'])
 def part125():
 	if request.method=='GET':
-		return render_template('part12.5.html',part125_active = "active",title="Part 12.5")
+		return render_template('part12_5.html',part125_active = "active",title="Part 12_5")
 	if request.method=='POST':
 		latitude1 = float(request.form["latitude1"])
 		latitude2 = float(request.form["latitude2"])
@@ -124,9 +124,9 @@ def part125():
 		" and longitude between "+str(low_longitude)+" and "+str(high_longitude)+" and mag between "+str(low_mag)+" and "+str(high_mag))
 		row = cursor.fetchall()
 		if row is not None:
-			return render_template('part12.5.html',part125_active = "active",data =row)
+			return render_template('part12_5.html',part125_active = "active",data =row)
 		else:
-			return render_template('part12.5.html',part125_active = "active",title="Part 12.5")
+			return render_template('part12_5.html',part125_active = "active",title="Part 12_5")
 
 
 @app.route('/part13',methods=['GET','POST'])
