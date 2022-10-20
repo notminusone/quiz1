@@ -99,7 +99,7 @@ def part12():
 		if row is not None:
 			return render_template('part12.html',part12_active = "active",data =row)
 		else:
-			return render_template('part12.html',part12_active = "active",title="Part 12")
+			return render_template('part12.html',part12_active = "active",title="Part 12",information="no data be searched")
 
 @app.route('/part14',methods=['GET','POST'])
 def part14():
@@ -119,7 +119,6 @@ def part14():
 		high_mag = float(request.form["high"])
 		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 		cursor = cnxn.cursor()
-		# cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude=?",latitude," and longitude=?",longitude)
 		cursor.execute("select id,latitude,longitude,net,place from nquakes2 where latitude between "+str(low_latitude)+" and "+str(high_latitude)+
 		" and longitude between "+str(low_longitude)+" and "+str(high_longitude)+" and mag between "+str(low_mag)+" and "+str(high_mag))
 		row = cursor.fetchall()

@@ -5,20 +5,30 @@
     style="width: 100%; display: flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
     <form action="" method="post" class="form" role="form"
         style="display: flex; flex-direction:row; width: 60%; margin-bottom: 40px;">
-        latitude1:<input class="form-control" id="latitude1" name="latitude1" placeholder="Input the first latitude " type="text"
+        <div style="display: flex;">
+            latitude1:<input class="form-control" id="latitude1" name="latitude1" placeholder="Input the first latitude " type="text"
             value="" style="margin-right: 20px;">
-        longitude1:<input class="form-control" id="longitude1" name="longitude1" placeholder="Input the first longitude " type="text"
+            longitude1:<input class="form-control" id="longitude1" name="longitude1" placeholder="Input the first longitude " type="text"
             value="" style="margin-right: 20px;">
-        latitude2:<input class="form-control" id="latitude2" name="latitude2" placeholder="Input the second latitude " type="text"
+        </div>
+        <div style="display: flex;">
+            latitude2:<input class="form-control" id="latitude2" name="latitude2" placeholder="Input the second latitude " type="text"
             value="" style="margin-right: 20px;">
-        longitude2:<input class="form-control" id="longitude2" name="longitude2" placeholder="Input the second longitude " type="text"
+            longitude2:<input class="form-control" id="longitude2" name="longitude2" placeholder="Input the second longitude " type="text"
             value="" style="margin-right: 20px;">
-        low mag:<input class="form-control" id="low" name="low" placeholder="Input the low mag value" type="text"
+        </div>
+        <div style="display: flex;">
+            low mag:<input class="form-control" id="low" name="low" placeholder="Input the low mag value" type="text"
             value="" style="margin-right: 20px;">
-        high mag:<input class="form-control" id="high" name="high" placeholder="Input the high mag value" type="text"
+            high mag:<input class="form-control" id="high" name="high" placeholder="Input the high mag value" type="text"
             value="" style="margin-right: 20px;">
+        </div>
+        
         <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Search">
     </form>
+    {% if information %}
+    <h3> {{information }} </h3>
+    {% endif %}
     {% if data %}
     <table class="table table-striped table-bordered table-hover table-condensed" style="width: 60%;margin:auto">
         <tr>
