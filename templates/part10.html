@@ -2,6 +2,9 @@
 
 {% block app_content %}
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    {% for i in range(6) %}
+    <h1>test</h1>
+    {% endfor %}
     <h4>The sum of quake :{{sum}}</h4>
     <br/>
     <h4>The id of maximum is {{max.id}}, The location is {{max.location}}</h4>
