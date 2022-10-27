@@ -55,7 +55,7 @@ def part11():
 		low = float(request.form["low"])
 		high = float(request.form["high"])
 		N = int(request.form["N"])
-		cnxn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+		cnxn = pyodbc.connect('Driver={ODBC Driver 18 for SQL Server};Server=tcp:notminusone.database.windows.net,1433;Database=notminusoneDatabase;Uid=not-1;Pwd={0626Fuyi};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
 		cursor = cnxn.cursor()
 		data = []
 		step = (high-low)/N
